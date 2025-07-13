@@ -1,3 +1,4 @@
 config.json
-./anciens_scraps
-./tentatives_script_scrap
+scraper.log
+results/
+**/__pycache__/
