@@ -67,5 +67,4 @@ def run_scraper():
     logging.info(final_msg)
 
     # Suppression des doublons
-    print("Suppression des doublons...")
     remove_duplicates_from_csv(file_path)

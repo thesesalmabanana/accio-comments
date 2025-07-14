@@ -1,5 +1,3 @@
-import importlib
-
 def main():
     # Dictionnaire des programmes disponibles
     programmes = {

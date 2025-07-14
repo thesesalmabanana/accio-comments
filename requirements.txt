@@ -1,0 +1,5 @@
+pandas
+praw
+prawcore
+tqdm
+datetime

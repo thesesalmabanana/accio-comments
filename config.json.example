@@ -1,0 +1,38 @@
+{
+  // Informations d'identification Reddit (à remplacer par vos vraies valeurs)
+  "reddit_api": {
+    "client_id": "your_client_id_here",
+    "client_secret": "your_client_secret_here",
+    "user_agent": "your_user_agent_name"
+  },
+
+  // Liste des subreddits que le script va analyser
+  "subreddits": [
+    "ExampleSubreddit1",
+    "ExampleSubreddit2"
+  ],
+
+  // Système de conditions par mot-clé, classées par thématiques
+  // Chaque catégorie (clé) contient DEUX listes imbriquées :
+  // - La première liste est une condition de contexte général (ex. "chatbot", "ai", etc.)
+  // - La deuxième liste contient les expressions spécifiques liées à cette thématique
+  //
+  // La logique utilisée est : (AU MOINS UN mot de la liste 1) ET (AU MOINS UN mot de la liste 2)
+  "keyword_conditions": {
+    "ExampleCategory": [
+      ["base_term_1", "base_term_2"],
+      ["specific_pattern_1", "specific_pattern_2"]
+    ],
+    "AnotherCategory": [
+      ["ai", "bot"],
+      ["trust", "misleading", "confused"]
+    ]
+  },
+
+  // Liste des bots Reddit connus pour être ignorés dans l'analyse
+  // (le script les reconnaît pour éviter de les inclure dans les résultats)
+  "knowBots": [
+    "examplebot1",
+    "examplebot2"
+  ]
+}
