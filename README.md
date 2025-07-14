@@ -1,10 +1,14 @@
 # Accio‑Comments
 
-**Accio‑Comments** est un outil Python permettant de **scraper des commentaires** selon des mots‑clés. 
-
+**Accio‑Comments** est un outil Python permettant de **scraper des commentaires** selon des mots‑clés sur différentes plateformes. Le but est de récolter des données concernants un sujet en particulier. 
+Les plateformes disponibles au scrap sont
+- Reddit
+- Youtube
+- X
+- 
 ---
 
-## 🚀 Fonctionnalités
+## 🛠️ Fonctionnalités
 
 - Scraping complet de Reddit ou de subreddits spécifiques.
 - Recherche de commentaires contenant des **mots‑clés** fournis.
@@ -61,6 +65,8 @@ Quel programme veux-tu lancer ?
 Choix :
 ```
 
+---
+
 ### 🔄 Fonctionnement du script `run.py`
 
 * Le script sert de point d’entrée unique à l’application.
@@ -72,4 +78,13 @@ Choix :
 * Ensuite, il appelle la fonction `run_scraper()` de ce module, qui lance le scraping.
 
 Ce design permet d’organiser proprement plusieurs scripts indépendants tout en les pilotant via une interface centralisée.
+
+---
+
+### 🔄 Scraping de Reddit
+
+Suite au choix du lancement du scraping de Reddit, des fichiers de résultats vont être générés. 
+Aussi pour comprendre le fonctionnement [rendez-vous sur la documentation](docs/scrap_reddit.md). 
+
+
 
