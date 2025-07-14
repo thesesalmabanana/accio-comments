@@ -10,7 +10,7 @@ Les plateformes disponibles au scrap sont
 
 ## 🛠️ Fonctionnalités
 
-- Scraping complet de Reddit ou de subreddits spécifiques.
+- Scraping spécifiques et customisables.
 - Recherche de commentaires contenant des **mots‑clés** fournis.
 - Sauvegarde des résultats dans des fichiers JSON ou CSV.
 - Modularité grâce à un dossier `functions/` pour ajout de logiques personnalisées.
