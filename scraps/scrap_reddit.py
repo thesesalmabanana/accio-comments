@@ -1,9 +1,7 @@
-import pandas as pd
 import os
 import time
 import logging
 from tqdm import tqdm
-from datetime import datetime
 
 # ========== IMPORTS CUSTOMS FUNCTIONS ==========
 from functions.clear_csv import remove_duplicates_from_csv
