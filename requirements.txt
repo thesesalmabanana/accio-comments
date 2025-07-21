@@ -3,3 +3,5 @@ praw
 prawcore
 tqdm
 datetime
+google-api-python-client
+langdetect
