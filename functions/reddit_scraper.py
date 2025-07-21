@@ -8,8 +8,7 @@ import time
 # ========== IMPORTS CUSTOMS FUNCTIONS ==========
 from functions.load_config import get_config
 from functions.check_bots import is_bot
-from functions.text_detection import match_keywords
-
+from functions.utils import filter_and_save_comment
 
 # ========== LOAD CONFIG ==========
 config = get_config()
@@ -38,19 +37,19 @@ def scrap_subreddit(subreddit_name, file_path):
 
             submission.comments.replace_more(limit=0)
             for comment in submission.comments.list():
-                comment_date = datetime.fromtimestamp(comment.created_utc).strftime('%Y-%m-%d')
-                clean_comment = comment.body.replace('"', "'").replace(',', ' ')
-                clean_title = submission.title.replace('"', "'").replace(',', ' ')
-
                 if is_bot(comment):
                     continue
 
-                labels, matched_keywords = match_keywords(comment.body, keyword_conditions)
-                if labels:
-                    clean_keywords = ';'.join(matched_keywords)
-                    with open(file_path, mode='a', encoding='utf-8', newline='') as f:
-                        f.write(f'"{subreddit_name}","{";".join(labels)}","{clean_keywords}","{clean_title}","{clean_comment}","{comment_date}"\n')
-                    comments_found += 1
+                comment_date = datetime.fromtimestamp(comment.created_utc).strftime('%Y-%m-%d')
+                comments_found += filter_and_save_comment(
+                    source_name=subreddit_name,
+                    comment_text=comment.body,
+                    title=submission.title,
+                    date=comment_date,
+                    keyword_conditions=keyword_conditions,
+                    file_path=file_path
+                )
+
 
         tqdm.write(f"✅ Terminé r/{subreddit_name} : {comments_found} commentaires trouvés.")
         logging.info(f"✅ Terminé r/{subreddit_name} : {comments_found} commentaires trouvés.")
