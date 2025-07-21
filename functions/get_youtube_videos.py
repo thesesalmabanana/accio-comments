@@ -1,4 +1,4 @@
-def get_video_ids(query, max_results, youtube):
+def get_video_ids(query, max_results, youtube, language='en'):
     video_ids = []
     next_page_token = None
 
@@ -8,7 +8,8 @@ def get_video_ids(query, max_results, youtube):
             type='video',
             part='id',
             maxResults=min(50, max_results - len(video_ids)),
-            pageToken=next_page_token
+            pageToken=next_page_token,
+            relevanceLanguage=language
         ).execute()
 
         for item in search_response['items']:

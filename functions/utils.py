@@ -2,6 +2,15 @@ import os
 import time
 
 from functions.text_detection import match_keywords
+from langdetect import detect, DetectorFactory
+
+DetectorFactory.seed = 0  # pour des résultats reproductibles
+
+def is_good_language(text, language='en'):
+    try:
+        return detect(text) == language
+    except:
+        return False
 
 def filter_and_save_comment(source_name, comment_text, title, date, keyword_conditions, file_path):
     labels, matched_keywords = match_keywords(comment_text, keyword_conditions)

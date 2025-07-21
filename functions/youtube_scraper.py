@@ -1,6 +1,7 @@
 from functions.get_youtube_comments import get_top_comments
 from functions.utils import filter_and_save_comment
 from functions.load_config import get_config
+from functions.utils import is_good_language
 
 config = get_config()
 all_comments = {}
@@ -19,7 +20,15 @@ def scrap_youtube(file_path,video_ids, youtube, MAX_COMMENTS_PER_VIDEO):
                 part='snippet',
                 id=vid
             ).execute()
-            video_title = video_info['items'][0]['snippet']['title']
+            
+            snippet = video_info['items'][0]['snippet']
+            title = snippet['title']
+            description = snippet.get('description', '')
+
+            # 🔍 Vérification de la langue
+            if not is_good_language(title + ' ' + description, config["youtube"]["language"]):
+                print("⚠️ La langue de la vidéo n'est pas " + config["youtube"]["language"])
+                continue  # 🔁 passe à la vidéo suivante
 
             # Récupérer les commentaires
             comments = get_top_comments(vid, MAX_COMMENTS_PER_VIDEO, youtube)
@@ -28,11 +37,10 @@ def scrap_youtube(file_path,video_ids, youtube, MAX_COMMENTS_PER_VIDEO):
             for comment in comments:
                 comment_date = comment['publishedAt'][:10]
                 comment_text = comment['textDisplay']
-                print(f"📃 Commentaire de {comment_date} : {comment_text}")
                 comments_found += filter_and_save_comment(
                     source_name=vid,
                     comment_text=comment_text,
-                    title=video_title,
+                    title=title,
                     date=comment_date,
                     keyword_conditions=keyword_conditions,
                     file_path=file_path

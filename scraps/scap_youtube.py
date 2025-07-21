@@ -19,15 +19,16 @@ def run_scraper():
     keyword_conditions = config["keyword_conditions"]
 
     # 🔍 Terme de recherche
-    QUERY = 'IA'
-    MAX_VIDEOS = 5
-    MAX_COMMENTS_PER_VIDEO = 10
+    QUERY = config["youtube"]["search_term"]
+    MAX_VIDEOS = config["youtube"]["max_videos"]
+    MAX_COMMENTS_PER_VIDEO = config["youtube"]["max_comments_per_video"]
+    LANGUAGE = config["youtube"]["language"]
     
     # Initialisation du client YouTube
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=API_KEY)
 
     # 🧠 Exécution
-    video_ids = get_video_ids(QUERY, MAX_VIDEOS, youtube)
+    video_ids = get_video_ids(QUERY, MAX_VIDEOS, youtube, LANGUAGE)
     
     # ➕ Création du fichier CSV
     file_path = init_csv("youtube", keyword_conditions, video_ids)
