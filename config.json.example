@@ -6,6 +6,19 @@
     "user_agent": "your_user_agent_name"
   },
 
+  "google_api":{
+    "api_key": "your_api_key_here",
+    "service_name": "your_service_name_here",
+    "api_version": "v3"
+  },
+
+  "youtube":{
+    "search_term": "your_search_term_here",
+    "max_videos": 10,
+    "max_comments_per_video": 100,
+    "language": "en"
+  },
+
   // Liste des subreddits que le script va analyser
   "subreddits": [
     "ExampleSubreddit1",

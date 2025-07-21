@@ -1,5 +1,4 @@
 from googleapiclient.discovery import build
-import time
 
 from functions.youtube_scraper import scrap_youtube
 from functions.get_youtube_videos import get_video_ids
@@ -37,7 +36,3 @@ def run_scraper():
     
     # Suppression des doublons
     remove_duplicates_from_csv(file_path)
-    
-    
-    
-    

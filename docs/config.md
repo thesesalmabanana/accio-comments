@@ -1,53 +1,96 @@
 # 📁 Structure du fichier de configuration : `config.json.example`
 
-Ce document explique la structure attendue et le rôle de chaque champ dans le fichier `config.json.example`. Vous pouvez utiliser ce modèle comme point de départ, le renommer en `config.json` et y insérer vos propres identifiants et préférences. Le fichier réel `config.json` doit être ajouté au `.gitignore` afin de ne pas exposer de données sensibles dans le contrôle de version.
+Ce document décrit la structure du fichier `config.json.example`, un modèle que vous pouvez copier et adapter (`cp config.json.example config.json`) pour vos propres besoins.  
+Le fichier réel `config.json` doit être ajouté au `.gitignore` pour éviter d'exposer des informations sensibles (identifiants API, mots-clés, etc.) dans votre dépôt Git.
 
 ---
 
 ## 🔑 `reddit_api`
 
-Contient les identifiants d'API Reddit. Ces informations sont nécessaires pour s'authentifier auprès de l'API Reddit.
+Contient les identifiants d’API Reddit, nécessaires pour l’authentification avec Reddit via PRAW.
 
 ```json
 "reddit_api": {
-  "client_id": "votre_client_id_ici",
-  "client_secret": "votre_client_secret_ici",
-  "user_agent": "votre_user_agent_personnalisé"
+  "client_id": "your_client_id_here",
+  "client_secret": "your_client_secret_here",
+  "user_agent": "your_user_agent_name"
 }
 ```
 
-* `client_id` : fourni par Reddit lors de l'enregistrement de votre application.
-* `client_secret` : clé secrète donnée par Reddit.
-* `user_agent` : chaîne courte identifiant votre script (ex. : `monbotreddit/1.0`).
+- `client_id` : fourni lors de l'enregistrement de votre application Reddit.
+- `client_secret` : la clé secrète liée à l'application.
+- `user_agent` : une chaîne d'identification personnalisée (ex. : `"myredditbot/1.0"`).
+
+---
+
+## 📺 `google_api`
+
+Contient les identifiants nécessaires pour accéder à l'API YouTube Data via Google Cloud Platform.
+
+```json
+"google_api": {
+  "api_key": "your_api_key_here",
+  "service_name": "your_service_name_here",
+  "api_version": "v3"
+}
+```
+
+- `api_key` : clé API fournie par Google.
+- `service_name` : généralement `"youtube"`.
+- `api_version` : généralement `"v3"`.
+
+---
+
+## 🔍 `youtube`
+
+Définit les paramètres de recherche et d'extraction pour les commentaires YouTube.
+
+```json
+"youtube": {
+  "search_term": "your_search_term_here",
+  "max_videos": 10,
+  "max_comments_per_video": 100,
+  "language": "en"
+}
+```
+
+- `search_term` : terme de recherche utilisé dans YouTube.
+- `max_videos` : nombre maximum de vidéos à analyser.
+- `max_comments_per_video` : nombre maximum de commentaires à récupérer par vidéo.
+- `language` : code de langue ISO (ex. `"en"` pour l’anglais).
 
 ---
 
 ## 📅 `subreddits`
 
-Liste des noms de subreddits (sans le `/r/`) à analyser.
+Liste des subreddits à analyser (sans le `/r/`).
 
 ```json
 "subreddits": [
-  "ChatGPT",
-  "ArtificialIntelligence",
-  "OpenAI"
+  "ExampleSubreddit1",
+  "ExampleSubreddit2"
 ]
 ```
 
-* Chaque élément est un nom de subreddit tel qu’il apparaît dans l’URL.
+- Chaque nom doit correspondre exactement à celui utilisé sur Reddit.
 
 ---
 
-## 🔍 `keyword_conditions`
+## 🧠 `keyword_conditions`
 
-Définit des catégories sémantiques à partir de **deux listes de mots-clés**.
-Chaque catégorie est associée à une liste de **deux tableaux** :
+Définit les conditions de correspondance par mots-clés pour catégoriser les commentaires.
 
 ```json
-"NomCategorie": [
-  ["mot_base_1", "mot_base_2"],
-  ["expression_specifique_1", "expression_specifique_2"]
-]
+"keyword_conditions": {
+  "ExampleCategory": [
+    ["base_term_1", "base_term_2"],
+    ["specific_pattern_1", "specific_pattern_2"]
+  ],
+  "AnotherCategory": [
+    ["ai", "bot"],
+    ["trust", "misleading", "confused"]
+  ]
+}
 ```
 
 ### 🧠 Correspondance logique
@@ -81,47 +124,54 @@ Il sera classé dans la catégorie `Divulgation`.
 
 ## 🤖 `knowBots`
 
-Liste des bots Reddit connus à ignorer pendant l'analyse.
+Liste des noms d’utilisateurs Reddit connus comme étant des bots, à **ignorer** automatiquement lors du traitement.
 
 ```json
 "knowBots": [
-  "automoderator",
-  "remindmebot",
-  "gpt2bot"
+  "examplebot1",
+  "examplebot2"
 ]
 ```
 
-* Cela permet d’éliminer les bruits causés par les messages automatiques.
-
 ---
 
-## 📚 Exemple de fichier : `config.json.example`
+## 📚 Exemple complet de fichier `config.json.example`
 
 ```json
 {
   "reddit_api": {
-    "client_id": "votre_client_id_ici",
-    "client_secret": "votre_client_secret_ici",
-    "user_agent": "votre_user_agent"
+    "client_id": "your_client_id_here",
+    "client_secret": "your_client_secret_here",
+    "user_agent": "your_user_agent_name"
+  },
+  "google_api": {
+    "api_key": "your_api_key_here",
+    "service_name": "youtube",
+    "api_version": "v3"
+  },
+  "youtube": {
+    "search_term": "your_search_term_here",
+    "max_videos": 10,
+    "max_comments_per_video": 100,
+    "language": "en"
   },
   "subreddits": [
-    "ChatGPT",
-    "ArtificialIntelligence",
-    "OpenAI"
+    "ExampleSubreddit1",
+    "ExampleSubreddit2"
   ],
   "keyword_conditions": {
-    "Divulgation": [
-      ["chatbot", "ai"],
-      ["disclose", "transparency"]
+    "ExampleCategory": [
+      ["base_term_1", "base_term_2"],
+      ["specific_pattern_1", "specific_pattern_2"]
     ],
-    "Tromperie": [
-      ["chatbot", "ai"],
-      ["lie", "manipulate"]
+    "AnotherCategory": [
+      ["ai", "bot"],
+      ["trust", "misleading", "confused"]
     ]
   },
   "knowBots": [
-    "automoderator",
-    "remindmebot"
+    "examplebot1",
+    "examplebot2"
   ]
 }
 ```
@@ -130,19 +180,17 @@ Liste des bots Reddit connus à ignorer pendant l'analyse.
 
 ## 📌 Astuces
 
-* Ajoutez le vrai fichier `config.json` au `.gitignore` pour ne pas l’ajouter au dépôt Git :
+- Ajoutez le fichier réel `config.json` à votre `.gitignore` :
 
 ```bash
 # .gitignore
 config.json
 ```
 
-* Pour l’utiliser :
+- Pour l’utiliser :
 
 ```bash
 cp config.json.example config.json
 ```
 
 Et remplissez-le avec vos propres informations.
-
-Si vous souhaitez un script Python pour valider automatiquement la structure de ce fichier, faites-moi signe !

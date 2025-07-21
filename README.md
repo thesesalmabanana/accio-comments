@@ -81,10 +81,10 @@ Ce design permet d’organiser proprement plusieurs scripts indépendants tout e
 
 ---
 
-### 🔄 Scraping de Reddit
+### 📑 Documentations des différents scraping
 
-Suite au choix du lancement du scraping de Reddit, des fichiers de résultats vont être générés. 
-Aussi pour comprendre le fonctionnement [rendez-vous sur la documentation](docs/scrap_reddit.md). 
+- [Reddit](docs/scrap_reddit.md)
+- [Youtube](docs/scrap_youtube.md) 
 
 
 
