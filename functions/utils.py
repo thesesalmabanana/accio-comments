@@ -50,6 +50,9 @@ def init_csv(platform, keyword_conditions, subreddits = ''):
         case "youtube":
             with open(file_path, mode='w', encoding='utf-8', newline='') as f:
                 f.write("Video_ID,Labels,Matched_Keywords,Video_Title,Comment,Date_Comment\n")
+        case "x":
+            with open(file_path, mode='w', encoding='utf-8', newline='') as f:
+                f.write("Tweet_ID,Labels,Matched_Keywords,Video_Title,Comment,Date_Comment\n")
 
     # Keywords
     unique_keywords = set()
